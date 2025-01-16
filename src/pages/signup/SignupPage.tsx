@@ -1,5 +1,8 @@
 import React, { useReducer } from 'react';
-import { useSignupMutation } from '../redux/network';
+import { useSignupMutation } from '../../redux/network';
+import ButtonComponent from '../../common-ui/button/ButtonComponent';
+import { Link } from 'react-router-dom';
+import './SignUpPage.css'
 
 export type SignupFormState = {
     name: string;
@@ -38,8 +41,8 @@ const FormReducer = (state: SignupFormState, action: FormAction) => {
 const SignupPage: React.FunctionComponent = () => {
     const [formState, dispatch] = useReducer<SignupFormState, any>(FormReducer, { name: '', email: '', password: '', phone: '' });
 
-    const [dispatcher, { error, isLoading, isSuccess, isError }] = useSignupMutation();
-
+    const [dispatcher, { isLoading }] = useSignupMutation();
+    const buttonDisabled = formState.email === '' || formState.name === '' || formState.password === '' || formState.phone === ''
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <h1>Signup</h1>
@@ -60,15 +63,18 @@ const SignupPage: React.FunctionComponent = () => {
                 <input type="tel" id="phone" onChange={(e) => {
                     dispatch({ type: FormActions.UPDATE_PHONE, payload: e.target.value });
                 }} />
-                <button type="submit" onClick={(e) => {
-                    e.preventDefault();
-                    if (formState.email !== '' && formState.password !== '' && formState.name !== '') {
-                        dispatcher(formState).then((response) => {
-                            console.log(response);
-                        });
+                <ButtonComponent classname='signup-button' text='Signup' onClick={() => {
+                    if (!buttonDisabled) {
+                        dispatcher(formState)
                     }
-                }}>Signup</button>
+                }} isLoading={isLoading} isDisabled={isLoading || buttonDisabled} />
             </form>
+            <Link style={{
+                marginTop: '15px',
+                fontFamily: 'Verdana',
+                fontSize: 'large',
+                color: 'white'
+            }} to={'/login'}>{"Already user? Go to Login"}</Link>
         </div>
     );
 }

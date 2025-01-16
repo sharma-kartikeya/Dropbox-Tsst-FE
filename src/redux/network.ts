@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { LoginFormState } from '../pages/LoginPage'
-import { SignupFormState } from '../pages/SignupPage'
+import { LoginFormState } from '../pages/login/LoginPage'
+import { SignupFormState } from '../pages/signup/SignupPage'
 import { DirectoriesResponse, DirectoryResponse, StringResponse, UserResponse } from './ResopnseTypes';
 
 export const NetworkApi = createApi({
@@ -50,8 +50,6 @@ export const NetworkApi = createApi({
                 params: {
                     folderId: folderId
                 },
-                credentials: 'include',
-                cacheTime: 3600
             })
         }),
 
@@ -61,11 +59,40 @@ export const NetworkApi = createApi({
                 method: 'POST',
                 body
             })
+        }),
+
+        uploadFile: builder.mutation<DirectoriesResponse, FormData>({
+            query: (body) => ({
+                url: 'file/upload',
+                method: 'POST',
+                body
+            })
+        }),
+
+        getLink: builder.query<StringResponse, string>({
+            query: (fileId) => ({
+                url: 'file/url',
+                method: "GET",
+                params: {
+                    fileId: fileId
+                }
+            })
+        }),
+
+        putLink: builder.query<StringResponse, { fileName: string, metadata: Record<string, string> }>({
+            query: ({ fileName, metadata }) => ({
+                url: 'file/upload-url',
+                method: 'POST',
+                body: {
+                    fileName: fileName,
+                    metadata: metadata
+                }
+            })
         })
     }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLazyGetUserStateQuery, useLoginUserMutation, useSignupMutation, useLogoutMutation, useFolderQuery, useLazyFolderQuery, useCreateFolderMutation } = NetworkApi
+export const { useGetUserStateQuery, useLazyGetUserStateQuery, useLoginUserMutation, useSignupMutation, useLogoutMutation, useFolderQuery, useLazyFolderQuery, useCreateFolderMutation, useUploadFileMutation, useLazyGetLinkQuery } = NetworkApi
 export default NetworkApi.reducer

@@ -1,0 +1,45 @@
+.folder-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    width: 100px;
+    height: 150px;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+}
+
+.folder-container:hover {
+    cursor: pointer;
+    background-color: #8c8c8c;
+}
+
+.text-container {
+    font-family: Verdana;
+    font-size: small;
+    font-weight: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    max-height: 150px;
+}
+
+.lottie-wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #8c8c8c98;
+    border-radius: 15px;
+}
+
+.new-folder-input {
+    width: 100px;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    text-align: center;
+}

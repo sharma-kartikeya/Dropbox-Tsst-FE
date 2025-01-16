@@ -1,0 +1,14 @@
+.signup-button {
+    font-size: large;
+    border-radius: 15px;
+    padding: 4px 12px;
+}
+
+.signup-button:hover:not(:disabled) {
+    cursor: pointer;
+    background-color: rgb(133, 133, 133);
+}
+
+.signup-button:disabled {
+    color: black;
+}

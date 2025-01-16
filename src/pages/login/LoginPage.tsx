@@ -1,7 +1,10 @@
 import React, { useReducer } from 'react';
-import { useLoginUserMutation } from '../redux/network';
+import { useLoginUserMutation } from '../../redux/network';
+import ButtonComponent from '../../common-ui/button/ButtonComponent';
+import { Link } from 'react-router-dom';
+import './LoginPage.css';
 
-export type LoginFormState = {
+export interface LoginFormState {
     email: string;
     password: string;
 }
@@ -30,7 +33,9 @@ const FormReducer = (state: LoginFormState, action: FormAction) => {
 const LoginPage: React.FunctionComponent = () => {
     const [formState, dispatch] = useReducer<LoginFormState, any>(FormReducer, { email: '', password: '' });
 
-    const [dispatcher] = useLoginUserMutation();
+    const [dispatcher, { isLoading }] = useLoginUserMutation();
+
+    const buttonDisabled = formState.email === '' || formState.password === '';
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -44,16 +49,18 @@ const LoginPage: React.FunctionComponent = () => {
                 <input type="password" id="password" onChange={(e) => {
                     dispatch({ type: FormActions.UPDATE_PASSWORD, payload: e.target.value });
                 }} />
-                <button type="submit" onClick={(e) => {
-                    e.preventDefault();
+                <ButtonComponent classname='login-button' text='Login' onClick={() => {
                     if (formState.email !== '' && formState.password !== '') {
-                        console.log(formState);
-                        dispatcher(formState).then((response) => {
-                            console.log(response);
-                        });
+                        dispatcher(formState);
                     }
-                }}>Login</button>
+                }} isLoading={isLoading} isDisabled={isLoading || buttonDisabled} />
             </form>
+            <Link style={{
+                marginTop: '15px',
+                fontFamily: 'Verdana',
+                fontSize: 'large',
+                color: 'white'
+            }} to={'/signup'}>{"New User? Want to sign up?"}</Link>
         </div>
     );
 }

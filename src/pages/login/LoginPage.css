@@ -1,0 +1,10 @@
+.login-button {
+    font-size: large;
+    border-radius: 15px;
+    padding: 4px 12px;
+}
+
+.login-button:hover {
+    cursor: pointer;
+    background-color: rgb(133, 133, 133);
+}

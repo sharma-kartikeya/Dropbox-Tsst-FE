@@ -7,7 +7,7 @@ type UserState = {
     name: string;
     email: string;
     phone: string;
-    rootDirectoryId?: string;
+    rootDirectoryId: string;
 }
 
 export type UserSliceState = UserState | null;
@@ -30,12 +30,14 @@ export const UserSlice = createSlice<UserSliceState, SliceCaseReducers<UserSlice
                 state.name = action.payload.data.name;
                 state.email = action.payload.data.email;
                 state.phone = action.payload.data.phone;
+                state.rootDirectoryId = action.payload.data.rootDirectoryId
             } else {
                 // If state is null, return a new object
                 return {
                     name: action.payload.data.name,
                     email: action.payload.data.email,
                     phone: action.payload.data.phone,
+                    rootDirectoryId: action.payload.data.rootDirectoryId
                 };
             }
         });
@@ -52,6 +54,7 @@ export const UserSlice = createSlice<UserSliceState, SliceCaseReducers<UserSlice
                 name: action.payload.data.name,
                 email: action.payload.data.email,
                 phone: action.payload.data.phone,
+                rootDirectoryId: action.payload.data.rootDirectoryId
             };
         });
 
@@ -63,6 +66,7 @@ export const UserSlice = createSlice<UserSliceState, SliceCaseReducers<UserSlice
                 name: action.payload.data.name,
                 email: action.payload.data.email,
                 phone: action.payload.data.phone,
+                rootDirectoryId: action.payload.data.rootDirectoryId
             };
         });
 
@@ -73,4 +77,5 @@ export const UserSlice = createSlice<UserSliceState, SliceCaseReducers<UserSlice
 });
 
 export const UserStateSelector = (state: RootState) => state.userReducer;
+export const RootDirectoryIdSelector = (state: RootState) => state.userReducer?.rootDirectoryId
 export default UserSlice.reducer;

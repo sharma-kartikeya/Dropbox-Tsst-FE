@@ -1,0 +1,29 @@
+.top-bar-container {
+    height: 54px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color:rgb(42, 24, 80);
+    padding: 0px 12px 0px 12px;
+}
+
+.top-bar-heading {
+    color: white;
+    font-family: "Verdana";
+    font-size: x-large;
+    font-weight: 550;
+}
+
+.logout-button {
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px 6px 12px;
+    background-color: rgb(161, 0, 0);
+    color: white;
+}
+
+.logout-button:hover {
+    cursor: pointer;
+    background-color: rgb(64, 0, 0);
+}

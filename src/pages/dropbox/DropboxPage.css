@@ -1,0 +1,30 @@
+.dropbox-container {
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.dropbox-button {
+    padding: 8px 12px;
+    border-radius: 15px;
+    font-family: Verdana;
+    font-size: medium;
+    font-weight: 600px;
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+
+.dropbox-button:hover {
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    color: black;
+}
